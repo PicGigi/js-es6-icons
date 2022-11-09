@@ -110,6 +110,27 @@ const cardList = [
 		type: 'user',
 		family: 'fas',
 		color: 'blue'
+	},
+    {
+		name: 'tree',
+		prefix: 'fa-',
+		type: 'test-ONE',
+		family: 'fas',
+		color: 'blue'
+	},
+    {
+		name: 'star',
+		prefix: 'fa-',
+		type: 'test-TWO',
+		family: 'fas',
+		color: 'blue'
+	},
+    {
+		name: 'heart',
+		prefix: 'fa-',
+		type: 'test-THREE',
+		family: 'fas',
+		color: 'blue'
 	}
 ];
 
@@ -131,45 +152,25 @@ function createCards() {
 //funzione per cambiare carte
 function changeCards() {
     SelectedCards = [];   //pulizia array
+    let currentOption = cardType.value;
 
-    if(cardType.value === "1"){   //selezione all
+    if(cardType.value === "all"){   //selezione all
         for(i=0; i<cardList.length; i++){
             const objCard = cardList[i];
             SelectedCards.push(objCard)
         }
-        createCards();
-        randomColor()
     }
-    else if(cardType.value === "2"){   //selezione animal
+    else if(cardType.value === currentOption){   //selezione specifica
         for(i=0; i<cardList.length; i++){
             const objCard = cardList[i];
-            if(objCard.type === 'animal'){
+            if(objCard.type === currentOption){
                 SelectedCards.push(objCard)
             }
         }
-        createCards();
-        randomColor()
     }
-    else if(cardType.value === "3"){   //selezione vegetable
-        for(i=0; i<cardList.length; i++){
-            const objCard = cardList[i];
-            if(objCard.type === 'vegetable'){
-                SelectedCards.push(objCard)
-            }
-        }
-        createCards();
-        randomColor()
-    }
-    else if(cardType.value === "4"){   //selezione user
-        for(i=0; i<cardList.length; i++){
-            const objCard = cardList[i];
-            if(objCard.type === 'user'){
-                SelectedCards.push(objCard)
-            }
-        }
-        createCards();
-        randomColor()
-    }
+
+    createCards();
+    randomColor();
 };
 
 
@@ -214,6 +215,17 @@ for(i=0; i<cardList.length; i++){
     SelectedCards.push(objCard)
 }
 createCards();
-randomColor()
+randomColor();
 
+//crezione option in base ai type degli oggetti
+let arrType = [];
 
+for(i=0; i<cardList.length; i++){
+    if(arrType.includes(cardList[i].type) === false){
+        arrType.push(cardList[i].type)
+    }
+}
+
+for(i=0; i<arrType.length; i++){
+    cardType.innerHTML += `<option value="${arrType[i]}">${arrType[i]}</option>`
+}
